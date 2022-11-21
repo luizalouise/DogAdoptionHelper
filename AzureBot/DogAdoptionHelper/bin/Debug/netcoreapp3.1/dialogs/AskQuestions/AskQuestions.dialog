@@ -1,0 +1,134 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "yiYbxJ",
+    "name": "AskQuestions",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "bUuTHb"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "NhCoGv"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "prompt": "${TextInput_Prompt_NhCoGv()}",
+          "property": "user.answer"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "6QBJfk"
+          },
+          "resultProperty": "turn.results",
+          "method": "POST",
+          "url": "https://languagesdog.cognitiveservices.azure.com/language/:query-knowledgebases?projectName=DogsAdoptionKnowledge&api-version=2021-10-01&deploymentName=production",
+          "body": "{   \"question\": \"${user.answer}\" }",
+          "headers": {
+            "Ocp-Apim-Subscription-Key": "9bdd2700a48d42aca5f2900b964fb3e4"
+          }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "IQqAaY"
+          },
+          "activity": "${SendActivity_IQqAaY()}"
+        },
+        {
+          "$kind": "Microsoft.DeleteProperty",
+          "id": "deleteAnswer",
+          "$designer": {
+            "id": "3dh5Hs",
+            "comment": "Delete answer"
+          },
+          "property": "user.answer"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "4gJeX9"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${TextInput_Prompt_4gJeX9()}",
+          "property": "user.answer"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "nuM9aH"
+          },
+          "resultProperty": "turn.results",
+          "headers": {
+            "Ocp-Apim-Subscription-Key": "9bdd2700a48d42aca5f2900b964fb3e4"
+          },
+          "url": "https://languagesdog.cognitiveservices.azure.com/language/:query-knowledgebases?projectName=DogsAdoptionKnowledge&api-version=2021-10-01&deploymentName=production",
+          "method": "POST",
+          "body": "{   \"question\": \"${user.answer}\" }"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "RKobny"
+          },
+          "activity": "${SendActivity_RKobny()}"
+        },
+        {
+          "$kind": "Microsoft.GotoAction",
+          "$designer": {
+            "id": "PVnlCx"
+          },
+          "actionId": "deleteAnswer"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "I71FwS",
+        "name": "CancelQuestions"
+      },
+      "intent": "CancelQuestions",
+      "actions": [
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "sWwvnS"
+          }
+        }
+      ]
+    }
+  ],
+  "generator": "AskQuestions.lg",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": [
+      {
+        "intent": "CancelQuestions",
+        "pattern": "Już wszystko wiem!"
+      }
+    ]
+  },
+  "id": "AskQuestions"
+}

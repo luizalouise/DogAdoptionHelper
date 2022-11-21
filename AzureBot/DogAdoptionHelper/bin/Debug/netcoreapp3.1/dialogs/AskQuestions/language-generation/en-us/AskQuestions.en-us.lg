@@ -1,0 +1,32 @@
+[import](common.lg)
+
+# TextInput_Prompt_NhCoGv()
+[Activity
+    Text = ${TextInput_Prompt_NhCoGv_text()}
+]
+
+# TextInput_Prompt_NhCoGv_text()
+- ```Wpisz swoje pytanie, a ja postaram się na nie odpowiedzieć :D
+Jeżeli nie wiesz o co możesz mnie zapytać wpisz "O co mogę cię zapytać?", a ja pokażę Ci przykładowe pytania.```
+# SendActivity_IQqAaY()
+[Activity
+    Text = ${SendActivity_IQqAaY_text()}
+]
+
+# SendActivity_IQqAaY_text()
+- ${turn.results.content.answers[0].answer}
+# TextInput_Prompt_4gJeX9()
+[Activity
+    Text = ${TextInput_Prompt_4gJeX9_text()}
+    SuggestedActions = Już wszystko wiem!
+]
+
+# TextInput_Prompt_4gJeX9_text()
+- Wpisz kolejne pytanie
+# SendActivity_RKobny()
+[Activity
+    Text = ${SendActivity_RKobny_text()}
+]
+
+# SendActivity_RKobny_text()
+- ${turn.results.content.answers[0].answer}

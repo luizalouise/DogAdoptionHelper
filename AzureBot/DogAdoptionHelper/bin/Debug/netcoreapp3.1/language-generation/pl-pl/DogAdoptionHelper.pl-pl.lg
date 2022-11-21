@@ -1,0 +1,81 @@
+[import](common.lg)
+
+# SendActivity_Greeting()
+[Activity
+    Text = ${SendActivity_Greeting_text()}
+]
+
+# SendActivity_Greeting_text()
+- Welcome to your bot.
+
+# SendActivity_DidNotUnderstand()
+[Activity
+    Text = ${SendActivity_DidNotUnderstand_text()}
+]
+
+# SendActivity_DidNotUnderstand_text()
+- Sorry, I didn't get that.
+# ChoiceInput_Prompt_vVjE4R()
+-
+# TextInput_Prompt_fuWZQ7()
+-
+# ChoiceInput_Prompt_OvS73D()
+-
+# ChoiceInput_Prompt_GqtuXi()
+-
+# ChoiceInput_Prompt_sswmgX()
+-
+# ChoiceInput_Prompt_yF12Pf()
+-
+# ChoiceInput_Prompt_hEc2YD()
+-
+# ChoiceInput_Prompt_X4g9OG()
+-
+# ChoiceInput_Prompt_dyco9U()
+-
+# TextInput_Prompt_r0UYc3()
+-
+# SendActivity_wqFdRt()
+-
+# TextInput_Prompt_bLWA1K()
+-
+# SendActivity_V8LZcO()
+-
+# TextInput_Prompt_CmbKZX()
+-
+# SendActivity_0p082Y()
+-
+# SendActivity_aomWRK()
+-
+# SendActivity_9nRQrz()
+-
+# SendActivity_mPePb2()
+-
+# ChoiceInput_Prompt_0I6PbE()
+-
+# SendActivity_JyjcHO()
+-
+# TextInput_Prompt_aJYldj()
+-
+# SendActivity_vPVWP9()
+-
+# SendActivity_4OiBsY()
+-
+# SendActivity_2IgzvY()
+-
+# SendActivity_YrpV8q()
+-
+# SendActivity_KpbMbf()
+-
+# ChoiceInput_Prompt_EtqOsy()
+-
+# SendActivity_DQQZIt()
+-
+# SendActivity_3BqkKj()
+-
+# SendActivity_w1DHRO()
+-
+# SendActivity_l21dqk()
+-
+# SendActivity_bj80eW()
+-

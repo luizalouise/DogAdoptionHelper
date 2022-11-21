@@ -1,0 +1,851 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "name": "DogAdoptionHelper",
+    "description": "",
+    "id": "A79tBe"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "376720",
+        "comment": "This trigger runs when a conversation update activity is sent to the bot. This indicates a user or bot being added or removed from a conversation."
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.Foreach",
+          "$designer": {
+            "id": "518944",
+            "name": "Loop: for each item",
+            "comment": "For each member added to the conversation."
+          },
+          "itemsProperty": "turn.Activity.membersAdded",
+          "actions": [
+            {
+              "$kind": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "641773",
+                "name": "Branch: if/else",
+                "comment": "Checks that that member added ID does not match the bot ID. This prevents the greeting message from being sent when the bot is added to a conversation."
+              },
+              "condition": "=string(dialog.foreach.value.id) != string(turn.Activity.Recipient.id)",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "859266",
+                    "name": "Send a response"
+                  },
+                  "activity": "${SendActivity_Greeting()}"
+                },
+                {
+                  "$kind": "Microsoft.SetProperty",
+                  "id": "multichoicePrompt",
+                  "$designer": {
+                    "id": "L18mau",
+                    "comment": "array set"
+                  },
+                  "property": "conversation.options_array",
+                  "value": [
+                    "Chcę znaleźć wymarzonego psa!",
+                    "Chcę uzyskać informacje o procesie adopcji \n lub porady dotyczące opieki nad psem",
+                    "Chcę zobaczyć statystyki dotyczące psów w schroniskach"
+                  ]
+                },
+                {
+                  "$kind": "Microsoft.DeleteProperty",
+                  "$designer": {
+                    "id": "tWmk8C",
+                    "comment": "delete choice"
+                  },
+                  "property": "user.option_choice"
+                },
+                {
+                  "$kind": "Microsoft.ChoiceInput",
+                  "$designer": {
+                    "id": "vVjE4R",
+                    "comment": "Wybierz"
+                  },
+                  "maxTurnCount": 100,
+                  "alwaysPrompt": true,
+                  "allowInterruptions": false,
+                  "unrecognizedPrompt": "",
+                  "invalidPrompt": "",
+                  "choiceOptions": {
+                    "includeNumbers": true,
+                    "inlineOrMore": ", or ",
+                    "inlineOr": " or ",
+                    "inlineSeparator": ", "
+                  },
+                  "property": "user.option_choice",
+                  "outputFormat": "index",
+                  "style": "heroCard",
+                  "defaultLocale": "pl-pl",
+                  "choices": "=conversation.options_array",
+                  "recognizerOptions": {
+                    "recognizeOrdinals": true,
+                    "recognizeNumbers": true
+                  },
+                  "prompt": "${ChoiceInput_Prompt_vVjE4R()}"
+                },
+                {
+                  "$kind": "Microsoft.SwitchCondition",
+                  "$designer": {
+                    "id": "D2zvxP"
+                  },
+                  "condition": "user.option_choice",
+                  "cases": [
+                    {
+                      "value": "0",
+                      "actions": [
+                        {
+                          "$kind": "Microsoft.SetProperty",
+                          "$designer": {
+                            "id": "4nTCnR"
+                          },
+                          "property": "user.dog",
+                          "value": {
+                            "breed": null,
+                            "sex": null,
+                            "size": null,
+                            "age": null,
+                            "coat": null,
+                            "child": null,
+                            "like_dog": null,
+                            "like_cats": null,
+                            "trained": null,
+                            "state": null
+                          }
+                        },
+                        {
+                          "$kind": "Microsoft.SetProperty",
+                          "$designer": {
+                            "id": "S1vDBu"
+                          },
+                          "property": "user.query",
+                          "value": "id is not null"
+                        },
+                        {
+                          "$kind": "Microsoft.SendActivity",
+                          "$designer": {
+                            "id": "9nRQrz"
+                          },
+                          "activity": "${SendActivity_9nRQrz()}"
+                        },
+                        {
+                          "$kind": "Microsoft.TextInput",
+                          "$designer": {
+                            "id": "fuWZQ7"
+                          },
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "prompt": "${TextInput_Prompt_fuWZQ7()}",
+                          "property": "user.dog.breed"
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "nVpq2b"
+                          },
+                          "condition": "user.dog.breed != \"Obojętnie\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "B0u2Te"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"breedPrimary = '\" + user.dog.breed + \"'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "0I6PbE"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "prompt": "${ChoiceInput_Prompt_0I6PbE()}",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "style": "heroCard",
+                          "choices": [
+                            "Piesek",
+                            "Suczka",
+                            "Obojętnie"
+                          ],
+                          "property": "user.dog.sex"
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "fx0xir"
+                          },
+                          "condition": "user.dog.sex == \"Piesek\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "sr62Qx"
+                              },
+                              "property": "user.dog.sex",
+                              "value": "Samiec"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "gf0Ouh"
+                          },
+                          "condition": "user.dog.sex != \"Obojętnie\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "FCMz3p"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"sex = '\" + user.dog.sex + \"'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "OvS73D"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${ChoiceInput_Prompt_OvS73D()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "property": "user.dog.size ",
+                          "outputFormat": "value",
+                          "style": "heroCard",
+                          "choices": [
+                            "Mały",
+                            "Średni",
+                            "Duży",
+                            "Bardzo duży",
+                            "Obojętnie"
+                          ],
+                          "recognizerOptions": {
+                            "recognizeOrdinals": true
+                          }
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "dtXHAW"
+                          },
+                          "condition": "user.dog.size != \"Obojętnie\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "8hpxay"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"size = '\" + user.dog.size+ \"'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "GqtuXi"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${ChoiceInput_Prompt_GqtuXi()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "choices": [
+                            "Szczeniak",
+                            "Młody",
+                            "Dorosły",
+                            "Senior",
+                            "Obojętnie"
+                          ],
+                          "style": "heroCard",
+                          "property": "user.dog.age"
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "zUuWWa"
+                          },
+                          "condition": "user.dog.age != \"Obojętnie\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "8a06rv"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"age = '\" + user.dog.age+ \"'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "dyco9U"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${ChoiceInput_Prompt_dyco9U()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "property": "user.dog.coat",
+                          "style": "heroCard",
+                          "choices": [
+                            "Krótkie",
+                            "Średnie",
+                            "Długie",
+                            "Obojętnie"
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "RctRTU"
+                          },
+                          "condition": "user.dog.coat != \"Obojętnie\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "9If8wq"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"coat = '\" + user.dog.coat+ \"'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "sswmgX"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${ChoiceInput_Prompt_sswmgX()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "property": "user.dog.trained",
+                          "style": "heroCard",
+                          "choices": [
+                            "Tak",
+                            "Nie"
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.SwitchCondition",
+                          "$designer": {
+                            "id": "PnW95R"
+                          },
+                          "condition": "user.dog.trained",
+                          "cases": [
+                            {
+                              "value": "Tak",
+                              "actions": [
+                                {
+                                  "$kind": "Microsoft.SetProperty",
+                                  "$designer": {
+                                    "id": "6hAtky"
+                                  },
+                                  "property": "user.query",
+                                  "value": "${user.query + \" and \" + \"houseTrained = 'True'\"}"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "yF12Pf"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${ChoiceInput_Prompt_yF12Pf()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "property": "user.dog.child",
+                          "style": "heroCard",
+                          "choices": [
+                            "Tak",
+                            "Nie"
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "G8LUwQ"
+                          },
+                          "condition": "user.dog.child == \"Tak\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "pPToIK"
+                              },
+                              "value": "${user.query + \" and \" + \"likeChildren = 'True'\"}",
+                              "property": "user.query"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "hEc2YD"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${ChoiceInput_Prompt_hEc2YD()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "property": "user.dog.like_dog",
+                          "style": "heroCard",
+                          "choices": [
+                            "Tak",
+                            "Nie"
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "X8HsMp"
+                          },
+                          "condition": "user.dog.like_dog == \"Tak\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "Uni0E1"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"likeDogs = 'True'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "X4g9OG"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "prompt": "${ChoiceInput_Prompt_X4g9OG()}",
+                          "property": "user.dog.like_cats",
+                          "style": "heroCard",
+                          "choices": [
+                            "Tak",
+                            "Nie"
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "4M8tZ6"
+                          },
+                          "condition": "user.dog.like_cats == \"Tak\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "rXejub"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"likeCats = 'True'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.TextInput",
+                          "$designer": {
+                            "id": "r0UYc3"
+                          },
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${TextInput_Prompt_r0UYc3()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "property": "user.dog.state"
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "jEwi57"
+                          },
+                          "condition": "user.dog.state != \"Obojętnie\"",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SetProperty",
+                              "$designer": {
+                                "id": "E2Rqic"
+                              },
+                              "property": "user.query",
+                              "value": "${user.query + \" and \" + \"state = '\" + user.dog.state+ \"'\"}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Iciclecreek.Sql.Execute",
+                          "$designer": {
+                            "id": "5n1pB5"
+                          },
+                          "connectionString": "Server=tcp:<server_name>,1433;Initial Catalog=<database_name>;Persist Security Info=False;User ID=<user>;Password=<Password>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+                          "statements": [
+                            "SELECT top 10 name FROM dogs where ${user.query};"
+                          ],
+                          "resultProperty": "user.foundDogs.name"
+                        },
+                        {
+                          "$kind": "Iciclecreek.Sql.Execute",
+                          "$designer": {
+                            "id": "KDBm4L"
+                          },
+                          "resultProperty": "user.foundDogs.breed",
+                          "statements": [
+                            "SELECT top 10 breedPrimary FROM dogs where ${user.query};"
+                          ],
+                          "connectionString": "Server=tcp:<server_name>,1433;Initial Catalog=<database_name>;Persist Security Info=False;User ID=<user>;Password=<Password>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+                        },
+                        {
+                          "$kind": "Iciclecreek.Sql.Execute",
+                          "$designer": {
+                            "id": "EiFbmN"
+                          },
+                          "resultProperty": "user.foundDogs.url",
+                          "statements": [
+                            "SELECT top 10 url FROM dogs where ${user.query};"
+                          ],
+                          "connectionString": "Server=tcp:<server_name>,1433;Initial Catalog=<database_name>;Persist Security Info=False;User ID=<user>;Password=<Password>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+                        },
+                        {
+                          "$kind": "Microsoft.IfCondition",
+                          "$designer": {
+                            "id": "6vMj3X"
+                          },
+                          "condition": "user.foundDogs.name == null",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SendActivity",
+                              "$designer": {
+                                "id": "YrpV8q"
+                              },
+                              "activity": "${SendActivity_YrpV8q()}"
+                            }
+                          ],
+                          "elseActions": [
+                            {
+                              "$kind": "Microsoft.SendActivity",
+                              "$designer": {
+                                "id": "KpbMbf"
+                              },
+                              "activity": "${SendActivity_KpbMbf()}"
+                            }
+                          ]
+                        },
+                        {
+                          "$kind": "Microsoft.Foreach",
+                          "$designer": {
+                            "id": "dYeS9a"
+                          },
+                          "index": "dialog.foreach.index",
+                          "value": "dialog.foreach.value",
+                          "itemsProperty": "user.foundDogs.name",
+                          "actions": [
+                            {
+                              "$kind": "Microsoft.SendActivity",
+                              "$designer": {
+                                "id": "2IgzvY"
+                              },
+                              "activity": "${SendActivity_2IgzvY()}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "value": "1",
+                      "actions": [
+                        {
+                          "$kind": "Microsoft.BeginDialog",
+                          "$designer": {
+                            "id": "NEKcQl"
+                          },
+                          "activityProcessed": true,
+                          "dialog": "AskQuestions"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "2",
+                      "actions": [
+                        {
+                          "$kind": "Microsoft.DeleteProperty",
+                          "$designer": {
+                            "id": "kwRWHv",
+                            "comment": "wykresy"
+                          },
+                          "property": "$wykres"
+                        },
+                        {
+                          "$kind": "Microsoft.ChoiceInput",
+                          "$designer": {
+                            "id": "EtqOsy"
+                          },
+                          "defaultLocale": "en-us",
+                          "disabled": false,
+                          "maxTurnCount": 3,
+                          "alwaysPrompt": false,
+                          "allowInterruptions": false,
+                          "prompt": "${ChoiceInput_Prompt_EtqOsy()}",
+                          "unrecognizedPrompt": "",
+                          "invalidPrompt": "",
+                          "defaultValueResponse": "",
+                          "choiceOptions": {
+                            "includeNumbers": true,
+                            "inlineOrMore": ", or ",
+                            "inlineOr": " or ",
+                            "inlineSeparator": ", "
+                          },
+                          "choices": [
+                            "Liczba psów według stanu",
+                            "Liczba psów w zależności od rasy (top 10)",
+                            "Liczba psów w zależności od płci i wieku",
+                            "Liczba psów w zależności od rozmiaru",
+                            "Liczba psów w zależności od statusu (szkolony / nie szkolony)"
+                          ],
+                          "style": "heroCard",
+                          "property": "$wykres",
+                          "recognizerOptions": {
+                            "recognizeOrdinals": true
+                          }
+                        },
+                        {
+                          "$kind": "Microsoft.SwitchCondition",
+                          "$designer": {
+                            "id": "REe5DX"
+                          },
+                          "condition": "$wykres",
+                          "cases": [
+                            {
+                              "value": "Liczba psów według stanu",
+                              "actions": [
+                                {
+                                  "$kind": "Microsoft.SendActivity",
+                                  "$designer": {
+                                    "id": "DQQZIt",
+                                    "comment": "test"
+                                  },
+                                  "activity": "${SendActivity_DQQZIt()}"
+                                }
+                              ]
+                            },
+                            {
+                              "value": "Liczba psów w zależności od rasy (top 10)",
+                              "actions": [
+                                {
+                                  "$kind": "Microsoft.SendActivity",
+                                  "$designer": {
+                                    "id": "3BqkKj"
+                                  },
+                                  "activity": "${SendActivity_3BqkKj()}"
+                                }
+                              ]
+                            },
+                            {
+                              "value": "Liczba psów w zależności od płci i wieku",
+                              "actions": [
+                                {
+                                  "$kind": "Microsoft.SendActivity",
+                                  "$designer": {
+                                    "id": "w1DHRO"
+                                  },
+                                  "activity": "${SendActivity_w1DHRO()}"
+                                }
+                              ]
+                            },
+                            {
+                              "value": "Liczba psów w zależności od rozmiaru",
+                              "actions": [
+                                {
+                                  "$kind": "Microsoft.SendActivity",
+                                  "$designer": {
+                                    "id": "l21dqk"
+                                  },
+                                  "activity": "${SendActivity_l21dqk()}"
+                                }
+                              ]
+                            },
+                            {
+                              "value": "Liczba psów w zależności od statusu (szkolony / nie szkolony)",
+                              "actions": [
+                                {
+                                  "$kind": "Microsoft.SendActivity",
+                                  "$designer": {
+                                    "id": "bj80eW"
+                                  },
+                                  "activity": "${SendActivity_bj80eW()}"
+                                }
+                              ]
+                            }
+                          ],
+                          "default": []
+                        }
+                      ]
+                    }
+                  ],
+                  "default": [
+                    {
+                      "$kind": "Microsoft.SendActivity",
+                      "$designer": {
+                        "id": "mPePb2"
+                      },
+                      "activity": "${SendActivity_mPePb2()}"
+                    }
+                  ]
+                },
+                {
+                  "$kind": "Microsoft.GotoAction",
+                  "$designer": {
+                    "id": "ngsmkO"
+                  },
+                  "actionId": "multichoicePrompt"
+                }
+              ]
+            }
+          ],
+          "value": "dialog.foreach.value",
+          "index": "dialog.foreach.index"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnUnknownIntent",
+      "$designer": {
+        "id": "mb2n1u",
+        "comment": "This trigger fires when an incoming activity is not handled by any other trigger."
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "kMjqz1",
+            "comment": "It is recommended to show a message to the user when the bot does not know how to handle an incoming activity and provide follow up options or a help message."
+          },
+          "activity": "${SendActivity_DidNotUnderstand()}"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "HFvNAm",
+        "name": "Cancel"
+      },
+      "intent": "Cancel",
+      "actions": []
+    }
+  ],
+  "generator": "DogAdoptionHelper.lg",
+  "id": "DogAdoptionHelper",
+  "recognizer": "DogAdoptionHelper.lu.qna"
+}

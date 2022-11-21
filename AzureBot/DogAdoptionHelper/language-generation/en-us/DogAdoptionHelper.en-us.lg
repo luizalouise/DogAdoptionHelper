@@ -1,0 +1,220 @@
+[import](common.lg)
+
+# SendActivity_Greeting()
+[Activity
+    Text = ${SendActivity_Greeting_text()}
+]
+
+# SendActivity_Greeting_text()
+- ```Cześć!
+Jestem botem, który pomoże Ci odnaleźć Twojego wymarzonego psiaka ze schroniska.
+Mogę Ci również opowiedzieć o przebiegu procesu adopcyjnego oraz udzielić różnych pomocnych wskazówek dotyczących opieki nad Twoim czworonożnym przyjacielem :)
+Jeżeli chcesz, mogę Ci także pokazać dane statystyczne przedstawiające sytuację piesków w schroniskach.```
+# SendActivity_DidNotUnderstand()
+[Activity
+    Text = ${SendActivity_DidNotUnderstand_text()}
+]
+
+# SendActivity_DidNotUnderstand_text()
+- Przepraszam, ale niestety nie umiem Ci pomóc :(
+# TextInput_Prompt_fuWZQ7()
+[Activity
+    Text = ${TextInput_Prompt_fuWZQ7_text()}
+]
+
+# TextInput_Prompt_fuWZQ7_text()
+- Jakiej rasy psa szukasz? Wpisz jedną rasę (z wielkiej litery), "Mieszaniec" lub, jeśli jest to dla Ciebie nieistotne, "Obojętnie".
+# ChoiceInput_Prompt_OvS73D()
+[Activity
+    Text = ${ChoiceInput_Prompt_OvS73D_text()}
+]
+
+# ChoiceInput_Prompt_OvS73D_text()
+- Jakiej wielkości?
+# ChoiceInput_Prompt_GqtuXi()
+[Activity
+    Text = ${ChoiceInput_Prompt_GqtuXi_text()}
+]
+
+# ChoiceInput_Prompt_GqtuXi_text()
+- W jakim wieku?
+# ChoiceInput_Prompt_sswmgX()
+[Activity
+    Text = ${ChoiceInput_Prompt_sswmgX_text()}
+]
+
+# ChoiceInput_Prompt_sswmgX_text()
+- Czy pies musi być wychowany? (np. nie załatwiać się w domu)
+# ChoiceInput_Prompt_yF12Pf()
+[Activity
+    Text = ${ChoiceInput_Prompt_yF12Pf_text()}
+]
+
+# ChoiceInput_Prompt_yF12Pf_text()
+- Czy musi być przyjazny dzieciom?
+# ChoiceInput_Prompt_hEc2YD()
+[Activity
+    Text = ${ChoiceInput_Prompt_hEc2YD_text()}
+]
+
+# ChoiceInput_Prompt_hEc2YD_text()
+- Czy musi być przyjazny innym psom?
+# ChoiceInput_Prompt_X4g9OG()
+[Activity
+    Text = ${ChoiceInput_Prompt_X4g9OG_text()}
+]
+
+# ChoiceInput_Prompt_X4g9OG_text()
+- Czy musi być przyjazny kotom?
+# ChoiceInput_Prompt_dyco9U()
+[Activity
+    Text = ${ChoiceInput_Prompt_dyco9U_text()}
+]
+
+# ChoiceInput_Prompt_dyco9U_text()
+- Jakiej długości włosie?
+# TextInput_Prompt_r0UYc3()
+[Activity
+    Text = ${TextInput_Prompt_r0UYc3_text()}
+]
+
+# TextInput_Prompt_r0UYc3_text()
+- W jakim stanie szukasz schroniska? Wpisz nazwę stanu (z wielkiej litery) lub "Obojętnie", gdy nie ma to dla Ciebie znaczenia.
+# TextInput_Prompt_CmbKZX()
+[Activity
+    Text = ${TextInput_Prompt_CmbKZX_text()}
+]
+
+# TextInput_Prompt_CmbKZX_text()
+- ```Wpisz swoje pytanie, a ja postaram się na nie odpowiedzieć :D
+Jeżeli nie wiesz o co możesz mnie zapytać wpisz "O co mogę cię zapytać?", a ja pokażę Ci przykładowe pytania.```
+# SendActivity_0p082Y()
+[Activity
+    Text = ${SendActivity_0p082Y_text()}
+]
+
+# SendActivity_0p082Y_text()
+- ${turn.results.content.answers[0].answer}
+# SendActivity_mPePb2()
+[Activity
+    Text = ${SendActivity_mPePb2_text()}
+]
+
+# SendActivity_mPePb2_text()
+- Niestety nie wiem o co Ci chodzi :(
+# ChoiceInput_Prompt_vVjE4R()
+[Activity
+    Text = ${ChoiceInput_Prompt_vVjE4R_text()}
+]
+
+# ChoiceInput_Prompt_vVjE4R_text()
+- W czym mogę Ci pomóc?
+# SendActivity_9nRQrz()
+[Activity
+    Text = ${SendActivity_9nRQrz_text()}
+]
+
+# SendActivity_9nRQrz_text()
+- Zadam Ci teraz kilka pytań, aby znaleźć psiaki dopasowane do Ciebie :)
+# ChoiceInput_Prompt_0I6PbE()
+[Activity
+    Text = ${ChoiceInput_Prompt_0I6PbE_text()}
+]
+
+# ChoiceInput_Prompt_0I6PbE_text()
+- Jakiej płci?
+# TextInput_Prompt_aJYldj()
+[Activity
+    Text = ${TextInput_Prompt_aJYldj_text()}
+]
+
+# TextInput_Prompt_aJYldj_text()
+- Wpisz kolejne pytanie
+# SendActivity_yIXdNS()
+[Activity
+    Text = ${SendActivity_yIXdNS_text()}
+]
+
+# SendActivity_yIXdNS_text()
+- ${turn.results.content.answers[0].answer}
+# SendActivity_2IgzvY()
+[HeroCard
+    title = ${dialog.foreach.value}
+    subtitle = ${user.foundDogs.breed[dialog.foreach.index]}
+    text = ${user.foundDogs.url[dialog.foreach.index]}
+]
+# SendActivity_YrpV8q()
+[Activity
+    Text = ${SendActivity_YrpV8q_text()}
+]
+
+# SendActivity_YrpV8q_text()
+- Niestety nie znalazłem takich piesków :(
+# SendActivity_KpbMbf()
+[Activity
+    Text = ${SendActivity_KpbMbf_text()}
+]
+
+# SendActivity_KpbMbf_text()
+- ```Oto czekające na Ciebie pieski!
+Poniżej znajdują się propozycje z imieniem, rasą i linkiem do ogłoszenia.```
+# ChoiceInput_Prompt_EtqOsy()
+[Activity
+    Text = ${ChoiceInput_Prompt_EtqOsy_text()}
+]
+
+# ChoiceInput_Prompt_EtqOsy_text()
+- Jaki wykres cię interesuje?
+# SendActivity_DQQZIt()
+[Activity
+    Attachments = ${SendActivity_DQQZIt_attachment_Rguf2W()}
+]
+
+# SendActivity_DQQZIt_attachment_Rguf2W()
+[HeroCard
+  title = [Liczba psów według stanu](https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-22.jpg)
+  images = https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-22.jpg
+]
+# SendActivity_3BqkKj()
+[Activity
+    Attachments = ${SendActivity_3BqkKj_attachment_Vp05VF()}
+]
+
+# SendActivity_3BqkKj_attachment_Vp05VF()
+[HeroCard
+  title = [Liczba psów w zależności od rasy (top 10)](https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-23.jpg)
+  images = https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-23.jpg
+]
+
+# SendActivity_w1DHRO()
+[Activity
+    Attachments = ${SendActivity_w1DHRO_attachment_R1ybVp()}
+]
+
+# SendActivity_w1DHRO_attachment_R1ybVp()
+[HeroCard
+  title = [Liczba psów w zależności od płci i wieku](https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-19_00-37-12.jpg)
+  images = https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-19_00-37-12.jpg
+]
+
+# SendActivity_l21dqk()
+[Activity
+    Attachments = ${SendActivity_l21dqk_attachment_voadYf()}
+]
+
+# SendActivity_l21dqk_attachment_voadYf()
+[HeroCard
+  title = [Liczba psów w zależności od rozmiaru](https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-26.jpg)
+  images = https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-26.jpg
+]
+
+# SendActivity_bj80eW()
+[Activity
+    Attachments = ${SendActivity_bj80eW_attachment_QDxbM0()}
+]
+
+# SendActivity_bj80eW_attachment_QDxbM0()
+[HeroCard
+  title = [Liczba psów w zależności od statusu (szkolony / nie szkolony)](https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-27.jpg)
+  images = https://oefjwoifj.blob.core.windows.net/visuals/photo_2022-11-18_22-26-27.jpg
+]

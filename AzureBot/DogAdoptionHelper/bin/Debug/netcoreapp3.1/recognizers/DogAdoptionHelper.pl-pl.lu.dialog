@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.LuisRecognizer",
+  "id": "LUIS_DogAdoptionHelper",
+  "applicationId": "=settings.luis.DogAdoptionHelper_pl_pl_lu.appId",
+  "version": "=settings.luis.DogAdoptionHelper_pl_pl_lu.version",
+  "endpoint": "=settings.luis.endpoint",
+  "endpointKey": "=settings.luis.endpointKey"
+}

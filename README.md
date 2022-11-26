@@ -76,6 +76,7 @@ Po kliknięciu przycisku *Chcę zobaczyć statystyki psów w schroniskach*. Zost
 ![bot2](https://user-images.githubusercontent.com/63157380/203543350-feb02b62-9cf7-460a-bc47-6aa8a51b834e.png)
 
 Należy teraz zdecydować jaka wizualizacja nas interesuje i kliknąć na nią. Po wybraniu zostanie nam ona wyświetlona. Mamy również możliwość kliknięcia w podpis wizualizacji, aby obejrzeć powiększony wykres w przeglądarce.
+
 ![bot3](https://user-images.githubusercontent.com/63157380/203543419-53b4f497-9960-4321-8923-ca43b0e27da7.png)
 ![bot4](https://user-images.githubusercontent.com/63157380/203543432-fff9a2c4-ec0b-43de-8f77-c7821092ad09.png)
 

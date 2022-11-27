@@ -81,6 +81,7 @@ Należy teraz zdecydować jaka wizualizacja nas interesuje i kliknąć na nią. 
 ![bot4](https://user-images.githubusercontent.com/63157380/203543432-fff9a2c4-ec0b-43de-8f77-c7821092ad09.png)
 
 ## Demo na kanale YouTube
+https://youtu.be/6F6VcyYL7sQ
 
 
 
